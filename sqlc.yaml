@@ -1,0 +1,15 @@
+version: "2"
+sql:
+  - schema: "./db/migration/" # スキーマファイルまたはマイグレーションファイルがあるディレクトリ
+    queries: "./db/query/"    # SQLクエリファイルがあるディレクトリ
+    engine: "postgresql"      # 使用するデータベースエンジン
+    gen:
+      go:
+        package: "db"         # 生成されるGoコードのパッケージ名
+        out: "./db/sqlc"      # 生成されるGoコードの出力ディレクトリ
+        emit_json_tags: true          # JSONタグを生成する
+        emit_prepared_queries: false  # プリペアドクエリを生成しない
+        emit_interface: false         # インターフェースを生成しない
+        emit_exact_table_names: false # DB のテーブル名を単数形に直した名称をモデル定義の構造体の名前とするかを設定
+        emit_empty_slices: false    #複数レコードを取得するクエリを実行したとき、
+                                    #取得数が 0 件の場合、true: 空のスライス、false: nil を返却する
